@@ -6,18 +6,25 @@ import (
 )
 
 type Reservation struct {
-	misc.GormModel
-	Aircraft Aircraft  `json:"aircraft"`
-	Start    time.Time `json:"start"`
-	End      time.Time `json:"end"`
+	ID         int       `json:"id"`
+	AircraftID int       `gorm:"column:aircraft_id"`
+	Aircraft   Aircraft  `json:"aircraft"`
+	UserID     int       `gorm:"column:user_id"`
+	User       User      `json:"user"`
+	Start      time.Time `gorm:"type:time" json:"start"`
+	End        time.Time `gorm:"type:time" json:"end"`
+}
+
+func (r Reservation) TableName() string {
+	return "reservation"
 }
 
 func ExampleReservation() Reservation {
 	return Reservation{
-		GormModel: misc.GormModel{},
-		Aircraft:  ExampleAircraft(),
-		Start:     misc.OneHourLater(),
-		End:       misc.OneHourLater(),
+		ID:       1,
+		Aircraft: ExampleAircraft(),
+		User:     ExampleUser(),
+		Start:    misc.OneHourLater(),
+		End:      misc.OneHourLater(),
 	}
-
 }

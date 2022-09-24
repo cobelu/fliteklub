@@ -1,13 +1,21 @@
 package model
 
-import (
-	"fliteklub/misc"
-	"time"
-)
-
 type Ownership struct {
-	misc.GormModel
-	Club     Club      `json:"club"`
-	Aircraft Aircraft  `json:"aircraft"`
-	Added    time.Time `json:"added"`
+	ID         int      `json:"id"`
+	ClubID     int      `gorm:"column:club_id"`
+	Club       Club     `json:"club"`
+	AircraftID int      `gorm:"column:aircraft_id"`
+	Aircraft   Aircraft `json:"aircraft"`
+}
+
+func (o Ownership) TableName() string {
+	return "ownership"
+}
+
+func ExampleOwnership() Ownership {
+	return Ownership{
+		ID:       1,
+		Club:     ExampleClub(),
+		Aircraft: ExampleAircraft(),
+	}
 }

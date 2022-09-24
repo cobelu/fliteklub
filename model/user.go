@@ -1,21 +1,19 @@
 package model
 
-import (
-	"fliteklub/misc"
-)
-
 type User struct {
-	misc.GormModel
-	FirstName string    `json:"first_name"`
-	LastName  string    `json:"last_name"`
-	Created   misc.Date `json:"created"`
+	ID        int    `json:"id"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+}
+
+func (u User) TableName() string {
+	return "user"
 }
 
 func ExampleUser() User {
 	return User{
-		GormModel: misc.GormModel{},
+		ID:        1,
 		FirstName: "Connor",
 		LastName:  "Luckett",
-		Created:   misc.Today(),
 	}
 }

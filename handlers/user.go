@@ -14,6 +14,7 @@ func (h UserHandler) get(c *fiber.Ctx) error {
 	var users []model.User
 
 	config.Database.Find(&users)
+
 	return c.Status(200).JSON(users)
 }
 
@@ -38,6 +39,7 @@ func (h UserHandler) insert(c *fiber.Ctx) error {
 	}
 
 	config.Database.Create(&user)
+
 	return c.Status(201).JSON(user)
 }
 
@@ -50,6 +52,7 @@ func (h UserHandler) update(c *fiber.Ctx) error {
 	}
 
 	config.Database.Where("id = ?", id).Updates(&user)
+
 	return c.Status(200).JSON(user)
 }
 
@@ -72,4 +75,9 @@ func (h UserHandler) AddRoutes(app *fiber.App) {
 	app.Post("/users", h.insert)
 	app.Put("/users/:id", h.update)
 	app.Delete("/users/:id", h.delete)
+}
+
+func (h UserHandler) AddExamples() {
+	example := model.ExampleUser
+	config.Database.Create(&example)
 }

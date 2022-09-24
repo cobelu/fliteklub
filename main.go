@@ -8,11 +8,6 @@ import (
 	"log"
 )
 
-func addRoutes(app *fiber.App) {
-	userHandler := handlers.UserHandler{}
-	userHandler.AddRoutes(app)
-}
-
 func main() {
 	app := fiber.New()
 
@@ -24,4 +19,17 @@ func main() {
 	addRoutes(app)
 
 	log.Fatal(app.Listen(":3000"))
+}
+
+func addRoutes(app *fiber.App) {
+	routeHandlers := []handlers.CrudHandler{
+		handlers.UserHandler{},
+		handlers.AircraftHandler{},
+		handlers.ClubHandler{},
+	}
+
+	for _, h := range routeHandlers {
+		h.AddRoutes(app)
+		h.AddExamples()
+	}
 }

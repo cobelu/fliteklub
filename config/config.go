@@ -36,6 +36,57 @@ func Migrate() error {
 	if err != nil {
 		return err
 	}
+	err = Database.AutoMigrate(&model.Club{})
+	if err != nil {
+		return err
+	}
+	err = Database.AutoMigrate(&model.Aircraft{})
+	if err != nil {
+		return err
+	}
+	err = Database.AutoMigrate(&model.Reservation{})
+	if err != nil {
+		return err
+	}
+	err = Database.AutoMigrate(&model.Membership{})
+	if err != nil {
+		return err
+	}
+	err = Database.AutoMigrate(&model.Ownership{})
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func Cleanup() error {
+	var err error
+
+	err = Database.Migrator().DropTable(&model.User{})
+	if err != nil {
+		return err
+	}
+	err = Database.Migrator().DropTable(&model.Club{})
+	if err != nil {
+		return err
+	}
+	err = Database.Migrator().DropTable(&model.Aircraft{})
+	if err != nil {
+		return err
+	}
+	err = Database.Migrator().DropTable(&model.Reservation{})
+	if err != nil {
+		return err
+	}
+	err = Database.Migrator().DropTable(&model.Membership{})
+	if err != nil {
+		return err
+	}
+	err = Database.Migrator().DropTable(&model.Ownership{})
+	if err != nil {
+		return err
+	}
 
 	return nil
 }

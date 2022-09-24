@@ -14,6 +14,7 @@ func (h ClubHandler) get(c *fiber.Ctx) error {
 	var clubs []model.Club
 
 	config.Database.Find(&clubs)
+	
 	return c.Status(200).JSON(clubs)
 }
 
@@ -38,6 +39,7 @@ func (h ClubHandler) insert(c *fiber.Ctx) error {
 	}
 
 	config.Database.Create(&club)
+
 	return c.Status(201).JSON(club)
 }
 
@@ -50,6 +52,7 @@ func (h ClubHandler) update(c *fiber.Ctx) error {
 	}
 
 	config.Database.Where("id = ?", id).Updates(&club)
+
 	return c.Status(200).JSON(club)
 }
 
@@ -72,4 +75,8 @@ func (h ClubHandler) AddRoutes(app *fiber.App) {
 	app.Post("/clubs", h.insert)
 	app.Put("/clubs/:id", h.update)
 	app.Delete("/clubs/:id", h.delete)
+}
+
+func (h ClubHandler) AddExamples() {
+	config.Database.Create(model.ExampleClub())
 }

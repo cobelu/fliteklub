@@ -1,21 +1,19 @@
 package model
 
-import (
-	"fliteklub/misc"
-)
-
 type Club struct {
-	misc.GormModel
-	Name     string    `json:"name"`
-	Location string    `json:"location"`
-	Created  misc.Date `json:"created"`
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	Location string `json:"location"`
+}
+
+func (c Club) TableName() string {
+	return "club"
 }
 
 func ExampleClub() Club {
 	return Club{
-		GormModel: misc.GormModel{},
-		Name:      "TAC",
-		Location:  "KGYI",
-		Created:   misc.Today(),
+		ID:       1,
+		Name:     "TAC",
+		Location: "KGYI",
 	}
 }

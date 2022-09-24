@@ -12,6 +12,7 @@ type CrudHandler interface {
 	update(c *fiber.Ctx) error
 	delete(c *fiber.Ctx) error
 	AddRoutes(app *fiber.App)
+	AddExamples()
 }
 
 type Crudder struct {
