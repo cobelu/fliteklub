@@ -4,6 +4,7 @@ import (
 	"fliteklub/config"
 	"fliteklub/model"
 	"github.com/gofiber/fiber/v2"
+	"gorm.io/gorm/clause"
 )
 
 type ReservationHandler struct {
@@ -22,7 +23,7 @@ func (h ReservationHandler) get(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var reservation model.Reservation
 
-	result := config.Database.Find(&reservation, id)
+	result := config.Database.Preload(clause.Associations).Find(&reservation, id)
 
 	if result.RowsAffected == 0 {
 		return c.SendStatus(404)
