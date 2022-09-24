@@ -70,11 +70,11 @@ func (h UserHandler) delete(c *fiber.Ctx) error {
 }
 
 func (h UserHandler) AddRoutes(app *fiber.App) {
-	app.Get("/user", h.getAll)
-	app.Get("/user/:id", h.get)
-	app.Post("/user", h.insert)
-	app.Put("/user/:id", h.update)
-	app.Delete("/user/:id", h.delete)
+	app.Get("/users", h.getAll)
+	app.Get("/users/:id", h.get)
+	app.Post("/users", h.insert)
+	app.Put("/users/:id", h.update)
+	app.Delete("/users/:id", h.delete)
 }
 
 func (h UserHandler) AddExamples() {

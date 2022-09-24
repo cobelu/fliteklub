@@ -9,7 +9,7 @@ type Aircraft struct {
 }
 
 func (a Aircraft) TableName() string {
-	return "aircraft"
+	return "aircrafts"
 }
 
 func ExampleAircraft() Aircraft {

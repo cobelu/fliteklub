@@ -70,11 +70,11 @@ func (h ReservationHandler) delete(c *fiber.Ctx) error {
 }
 
 func (h ReservationHandler) AddRoutes(app *fiber.App) {
-	app.Get(h.c.Path("/reservation/:id"), h.getAll)
-	app.Get("/reservation/:id", h.get)
-	app.Post("/reservation", h.insert)
-	app.Put("/reservation/:id", h.update)
-	app.Delete("/reservation/:id", h.delete)
+	app.Get(h.c.Path("/reservations/:id"), h.getAll)
+	app.Get("/reservations/:id", h.get)
+	app.Post("/reservations", h.insert)
+	app.Put("/reservations/:id", h.update)
+	app.Delete("/reservations/:id", h.delete)
 }
 
 func (h ReservationHandler) AddExamples() {

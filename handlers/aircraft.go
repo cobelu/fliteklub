@@ -70,11 +70,11 @@ func (h AircraftHandler) delete(c *fiber.Ctx) error {
 }
 
 func (h AircraftHandler) AddRoutes(app *fiber.App) {
-	app.Get(h.c.Path("/aircraft/:id"), h.getAll)
-	app.Get("/aircraft/:id", h.get)
-	app.Post("/aircraft", h.insert)
-	app.Put("/aircraft/:id", h.update)
-	app.Delete("/aircraft/:id", h.delete)
+	app.Get(h.c.Path("/aircrafts/:id"), h.getAll)
+	app.Get("/aircrafts/:id", h.get)
+	app.Post("/aircrafts", h.insert)
+	app.Put("/aircrafts/:id", h.update)
+	app.Delete("/aircrafts/:id", h.delete)
 }
 
 func (h AircraftHandler) AddExamples() {
