@@ -19,10 +19,6 @@ func (r Reservation) TableName() string {
 	return "reservations"
 }
 
-func (r Reservation) ModelName() string {
-	return "Reservation"
-}
-
 func ExampleReservation() Reservation {
 	return Reservation{
 		ID:       1,

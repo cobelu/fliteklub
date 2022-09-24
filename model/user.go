@@ -10,10 +10,6 @@ func (u User) TableName() string {
 	return "users"
 }
 
-func (u User) ModelName() string {
-	return "User"
-}
-
 func ExampleUser() User {
 	return User{
 		ID:        1,

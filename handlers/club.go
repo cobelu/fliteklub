@@ -4,6 +4,7 @@ import (
 	"fliteklub/config"
 	"fliteklub/model"
 	"github.com/gofiber/fiber/v2"
+	"gorm.io/gorm/clause"
 )
 
 type ClubHandler struct {
@@ -22,9 +23,8 @@ func (h ClubHandler) get(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var club model.Club
 
-	dbModel := config.Database.Model(&model.Club{})
-	preloaded := dbModel.Preload(model.Club{}.TableName()).Preload(model.Aircraft{}.ModelName())
-	result := preloaded.Find(&club, id)
+	dbModel := config.Database.Model(&model.Club{}).Preload(clause.Associations)
+	result := dbModel.Find(&club, id)
 
 	if result.RowsAffected == 0 {
 		return c.SendStatus(404)
