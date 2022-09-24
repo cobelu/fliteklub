@@ -12,7 +12,8 @@ var Database *gorm.DB
 func Connect() error {
 	var err error
 
-	Database, err = gorm.Open(sqlite.Open(DatabaseUri), &gorm.Config{
+	db := sqlite.Open(DatabaseUri)
+	Database, err = gorm.Open(db, &gorm.Config{
 		SkipDefaultTransaction: true,
 		PrepareStmt:            true,
 	})

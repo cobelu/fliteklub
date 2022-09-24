@@ -10,7 +10,7 @@ type AircraftHandler struct {
 	c Crudder
 }
 
-func (h AircraftHandler) get(c *fiber.Ctx) error {
+func (h AircraftHandler) getAll(c *fiber.Ctx) error {
 	var aircrafts []model.Aircraft
 
 	config.Database.Find(&aircrafts)
@@ -18,7 +18,7 @@ func (h AircraftHandler) get(c *fiber.Ctx) error {
 	return c.Status(200).JSON(aircrafts)
 }
 
-func (h AircraftHandler) getAll(c *fiber.Ctx) error {
+func (h AircraftHandler) get(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var aircraft model.Aircraft
 
@@ -70,7 +70,7 @@ func (h AircraftHandler) delete(c *fiber.Ctx) error {
 }
 
 func (h AircraftHandler) AddRoutes(app *fiber.App) {
-	app.Get(h.c.Path("/aircrafts/:id"), h.getAll)
+	app.Get("/aircrafts", h.getAll)
 	app.Get("/aircrafts/:id", h.get)
 	app.Post("/aircrafts", h.insert)
 	app.Put("/aircrafts/:id", h.update)

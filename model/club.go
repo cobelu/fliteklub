@@ -12,6 +12,10 @@ func (c Club) TableName() string {
 	return "clubs"
 }
 
+func (c Club) ModelName() string {
+	return "Club"
+}
+
 func ExampleClub() Club {
 	exampleAircraft := ExampleAircraft()
 	exampleMember := ExampleUser()

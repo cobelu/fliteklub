@@ -23,7 +23,7 @@ func (h ClubHandler) get(c *fiber.Ctx) error {
 	var club model.Club
 
 	dbModel := config.Database.Model(&model.Club{})
-	preloaded := dbModel.Preload("memberships").Preload("ownerships")
+	preloaded := dbModel.Preload(model.Club{}.TableName()).Preload(model.Aircraft{}.ModelName())
 	result := preloaded.Find(&club, id)
 
 	if result.RowsAffected == 0 {

@@ -10,7 +10,7 @@ type UserHandler struct {
 	c Crudder
 }
 
-func (h UserHandler) get(c *fiber.Ctx) error {
+func (h UserHandler) getAll(c *fiber.Ctx) error {
 	var users []model.User
 
 	config.Database.Find(&users)
@@ -18,7 +18,7 @@ func (h UserHandler) get(c *fiber.Ctx) error {
 	return c.Status(200).JSON(users)
 }
 
-func (h UserHandler) getAll(c *fiber.Ctx) error {
+func (h UserHandler) get(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var user model.User
 

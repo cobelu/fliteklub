@@ -10,7 +10,7 @@ type ReservationHandler struct {
 	c Crudder
 }
 
-func (h ReservationHandler) get(c *fiber.Ctx) error {
+func (h ReservationHandler) getAll(c *fiber.Ctx) error {
 	var reservations []model.Reservation
 
 	config.Database.Find(&reservations)
@@ -18,7 +18,7 @@ func (h ReservationHandler) get(c *fiber.Ctx) error {
 	return c.Status(200).JSON(reservations)
 }
 
-func (h ReservationHandler) getAll(c *fiber.Ctx) error {
+func (h ReservationHandler) get(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var reservation model.Reservation
 
@@ -70,7 +70,7 @@ func (h ReservationHandler) delete(c *fiber.Ctx) error {
 }
 
 func (h ReservationHandler) AddRoutes(app *fiber.App) {
-	app.Get(h.c.Path("/reservations/:id"), h.getAll)
+	app.Get("/reservations", h.getAll)
 	app.Get("/reservations/:id", h.get)
 	app.Post("/reservations", h.insert)
 	app.Put("/reservations/:id", h.update)

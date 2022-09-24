@@ -12,6 +12,10 @@ func (a Aircraft) TableName() string {
 	return "aircrafts"
 }
 
+func (a Aircraft) ModelName() string {
+	return "Aircraft"
+}
+
 func ExampleAircraft() Aircraft {
 	return Aircraft{
 		ID:    1,
