@@ -6,14 +6,18 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func GetUsers(c *fiber.Ctx) error {
+type UserHandler struct {
+	c Crudder
+}
+
+func (h UserHandler) get(c *fiber.Ctx) error {
 	var users []model.User
 
 	config.Database.Find(&users)
 	return c.Status(200).JSON(users)
 }
 
-func GetUser(c *fiber.Ctx) error {
+func (h UserHandler) getAll(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var user model.User
 
@@ -26,7 +30,7 @@ func GetUser(c *fiber.Ctx) error {
 	return c.Status(200).JSON(user)
 }
 
-func AddUser(c *fiber.Ctx) error {
+func (h UserHandler) insert(c *fiber.Ctx) error {
 	user := new(model.User)
 
 	if err := c.BodyParser(user); err != nil {
@@ -37,7 +41,7 @@ func AddUser(c *fiber.Ctx) error {
 	return c.Status(201).JSON(user)
 }
 
-func UpdateUser(c *fiber.Ctx) error {
+func (h UserHandler) update(c *fiber.Ctx) error {
 	user := new(model.User)
 	id := c.Params("id")
 
@@ -49,7 +53,7 @@ func UpdateUser(c *fiber.Ctx) error {
 	return c.Status(200).JSON(user)
 }
 
-func RemoveUser(c *fiber.Ctx) error {
+func (h UserHandler) delete(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var user model.User
 
@@ -60,4 +64,12 @@ func RemoveUser(c *fiber.Ctx) error {
 	}
 
 	return c.SendStatus(200)
+}
+
+func (h UserHandler) AddRoutes(app *fiber.App) {
+	app.Get("/users", h.getAll)
+	app.Get("/users/:id", h.get)
+	app.Post("/users", h.insert)
+	app.Put("/users/:id", h.update)
+	app.Delete("/users/:id", h.delete)
 }
