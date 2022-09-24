@@ -52,7 +52,7 @@ func (h AircraftHandler) update(c *fiber.Ctx) error {
 	}
 
 	config.Database.Where("id = ?", id).Updates(&aircraft)
-	
+
 	return c.Status(200).JSON(aircraft)
 }
 
@@ -78,5 +78,6 @@ func (h AircraftHandler) AddRoutes(app *fiber.App) {
 }
 
 func (h AircraftHandler) AddExamples() {
-	config.Database.Create(model.ExampleAircraft())
+	example := model.ExampleAircraft()
+	config.Database.Create(&example)
 }

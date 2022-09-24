@@ -9,9 +9,21 @@ import (
 )
 
 func main() {
+	var err error
+
 	app := fiber.New()
 
-	err := config.Connect()
+	err = config.Connect()
+	if err != nil {
+		return
+	}
+
+	err = config.Cleanup()
+	if err != nil {
+		return
+	}
+
+	err = config.Migrate()
 	if err != nil {
 		return
 	}
@@ -23,9 +35,12 @@ func main() {
 
 func addRoutes(app *fiber.App) {
 	routeHandlers := []handlers.CrudHandler{
-		handlers.UserHandler{},
 		handlers.AircraftHandler{},
 		handlers.ClubHandler{},
+		handlers.MembershipHandler{},
+		handlers.OwnershipHandler{},
+		handlers.ReservationHandler{},
+		handlers.UserHandler{},
 	}
 
 	for _, h := range routeHandlers {

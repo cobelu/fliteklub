@@ -14,7 +14,7 @@ func (h ClubHandler) get(c *fiber.Ctx) error {
 	var clubs []model.Club
 
 	config.Database.Find(&clubs)
-	
+
 	return c.Status(200).JSON(clubs)
 }
 
@@ -78,5 +78,6 @@ func (h ClubHandler) AddRoutes(app *fiber.App) {
 }
 
 func (h ClubHandler) AddExamples() {
-	config.Database.Create(model.ExampleClub())
+	example := model.ExampleClub()
+	config.Database.Create(&example)
 }

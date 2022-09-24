@@ -21,11 +21,6 @@ func Connect() error {
 		panic(err)
 	}
 
-	err = Migrate()
-	if err != nil {
-		return err
-	}
-
 	return nil
 }
 
