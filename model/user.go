@@ -1,9 +1,10 @@
 package model
 
 type User struct {
-	ID        int    `json:"id"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
+	ID        int     `json:"id"`
+	FirstName string  `json:"first_name"`
+	LastName  string  `json:"last_name"`
+	Clubs     []*Club `gorm:"many2many:membership"`
 }
 
 func (u User) TableName() string {
@@ -11,9 +12,11 @@ func (u User) TableName() string {
 }
 
 func ExampleUser() User {
+	exampleClub := ExampleClub()
 	return User{
 		ID:        1,
 		FirstName: "Connor",
 		LastName:  "Luckett",
+		Clubs:     []*Club{&exampleClub},
 	}
 }

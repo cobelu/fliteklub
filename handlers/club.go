@@ -70,11 +70,11 @@ func (h ClubHandler) delete(c *fiber.Ctx) error {
 }
 
 func (h ClubHandler) AddRoutes(app *fiber.App) {
-	app.Get(h.c.Path("/clubs/:id"), h.getAll)
-	app.Get("/clubs/:id", h.get)
-	app.Post("/clubs", h.insert)
-	app.Put("/clubs/:id", h.update)
-	app.Delete("/clubs/:id", h.delete)
+	app.Get(h.c.Path("/club/:id"), h.getAll)
+	app.Get("/club/:id", h.get)
+	app.Post("/club", h.insert)
+	app.Put("/club/:id", h.update)
+	app.Delete("/club/:id", h.delete)
 }
 
 func (h ClubHandler) AddExamples() {

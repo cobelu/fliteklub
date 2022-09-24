@@ -24,63 +24,27 @@ func Connect() error {
 	return nil
 }
 
-func Migrate() error {
+func Migrate(models []model.Model) error {
 	var err error
 
-	err = Database.AutoMigrate(&model.User{})
-	if err != nil {
-		return err
-	}
-	err = Database.AutoMigrate(&model.Club{})
-	if err != nil {
-		return err
-	}
-	err = Database.AutoMigrate(&model.Aircraft{})
-	if err != nil {
-		return err
-	}
-	err = Database.AutoMigrate(&model.Reservation{})
-	if err != nil {
-		return err
-	}
-	err = Database.AutoMigrate(&model.Membership{})
-	if err != nil {
-		return err
-	}
-	err = Database.AutoMigrate(&model.Ownership{})
-	if err != nil {
-		return err
+	for _, m := range models {
+		err = Database.AutoMigrate(&m)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
 }
 
-func Cleanup() error {
+func Cleanup(models []model.Model) error {
 	var err error
 
-	err = Database.Migrator().DropTable(&model.User{})
-	if err != nil {
-		return err
-	}
-	err = Database.Migrator().DropTable(&model.Club{})
-	if err != nil {
-		return err
-	}
-	err = Database.Migrator().DropTable(&model.Aircraft{})
-	if err != nil {
-		return err
-	}
-	err = Database.Migrator().DropTable(&model.Reservation{})
-	if err != nil {
-		return err
-	}
-	err = Database.Migrator().DropTable(&model.Membership{})
-	if err != nil {
-		return err
-	}
-	err = Database.Migrator().DropTable(&model.Ownership{})
-	if err != nil {
-		return err
+	for _, m := range models {
+		err = Database.Migrator().DropTable(&m)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
