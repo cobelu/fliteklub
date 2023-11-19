@@ -32,8 +32,8 @@ func Today() Date {
 }
 
 type Coordinate struct {
-	latitude  float64
-	longitude float64
+	Latitude  float64
+	Longitude float64
 }
 
 type DistanceUnit int
@@ -44,13 +44,13 @@ const (
 	nauticalMile
 )
 
-// distanceTo calculates the distance from one Coordinat to another.
+// DistanceTo calculates the distance from one Coordinat to another.
 // It uses the algorithm found here: https://www.geodatasource.com/developers/go
-func (c Coordinate) distanceTo(coord Coordinate, unit DistanceUnit) float64 {
-	radlat1 := math.Pi * c.latitude / 180
-	radlat2 := math.Pi * coord.latitude / 180
+func (c Coordinate) DistanceTo(coord Coordinate, unit DistanceUnit) float64 {
+	radlat1 := math.Pi * c.Latitude / 180
+	radlat2 := math.Pi * coord.Latitude / 180
 
-	theta := c.longitude - coord.longitude
+	theta := c.Longitude - coord.Longitude
 	radtheta := math.Pi * theta / 180
 
 	dist := math.Sin(radlat1)*math.Sin(radlat2) + math.Cos(radlat1)*math.Cos(radlat2)*math.Cos(radtheta)
